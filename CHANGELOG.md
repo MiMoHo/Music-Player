@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fixed importing m3u playlists whose entries use relative track paths ([#73])
 
 ## [1.8.1] - 2026-02-14
 ### Changed
@@ -115,6 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#47]: https://github.com/FossifyOrg/Music-Player/issues/47
 [#65]: https://github.com/FossifyOrg/Music-Player/issues/65
 [#69]: https://github.com/FossifyOrg/Music-Player/issues/69
+[#73]: https://github.com/FossifyOrg/Music-Player/issues/73
 [#97]: https://github.com/FossifyOrg/Music-Player/issues/97
 [#179]: https://github.com/FossifyOrg/Music-Player/issues/179
 [#206]: https://github.com/FossifyOrg/Music-Player/issues/206

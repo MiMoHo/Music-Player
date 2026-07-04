@@ -34,8 +34,15 @@ class M3uImporter(
 
             val playlistItems = mutableListOf<Track>()
             for (m3uEntry in m3uEntries) {
+                // m3u entries may use paths relative to the playlist file. The parser is
+                // invoked without a base path, so relative entries stay unresolved and can
+                // never equal an absolute MediaStore path. The playlist's real directory is
+                // also unavailable for content:// imports (copied to a cache temp file), so
+                // match on the trailing path segment instead of requiring an exact path.
+                val entryPath = m3uEntry.location.toString().replace('\\', '/')
                 for (track in existingTracks) {
-                    if (m3uEntry.location.toString() == track.path || m3uEntry.title == track.title) {
+                    val pathMatches = track.path == entryPath || track.path.endsWith("/$entryPath")
+                    if (pathMatches || m3uEntry.title == track.title) {
                         val copy = track.copy(id = 0, playListId = playListId)
                         playlistItems.add(copy)
                     }
