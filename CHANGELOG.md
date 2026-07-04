@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fixed a crash/error toast ("column 'date_added' does not exist") when opening or adding audio files (e.g. WAV) that are indexed by the system but not in the library ([#268])
 
 ## [1.8.1] - 2026-02-14
 ### Changed
@@ -122,6 +124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#228]: https://github.com/FossifyOrg/Music-Player/issues/228
 [#258]: https://github.com/FossifyOrg/Music-Player/issues/258
 [#261]: https://github.com/FossifyOrg/Music-Player/issues/261
+[#268]: https://github.com/FossifyOrg/Music-Player/issues/268
 [#269]: https://github.com/FossifyOrg/Music-Player/issues/269
 [#298]: https://github.com/FossifyOrg/Music-Player/issues/298
 [#361]: https://github.com/FossifyOrg/Music-Player/issues/361
