@@ -14,7 +14,28 @@ import org.fossify.musicplayer.playback.PlaybackService
 @UnstableApi
 internal fun PlaybackService.getPlayerListener() = object : Player.Listener {
 
-    override fun onPlayerError(error: PlaybackException) = toast(org.fossify.commons.R.string.unknown_error_occurred, Toast.LENGTH_LONG)
+    // Tracks consecutive playback errors so we don't loop endlessly over a queue that
+    // consists only of unplayable items (e.g. unsupported MIDI files).
+    private var consecutivePlaybackErrors = 0
+
+    override fun onPlayerError(error: PlaybackException) {
+        toast(org.fossify.commons.R.string.unknown_error_occurred, Toast.LENGTH_LONG)
+        withPlayer {
+            // The default behaviour halts playback on an unplayable item (e.g. an unsupported
+            // MIDI file). Instead, skip it and keep playing the rest of the queue.
+            if (hasNextMediaItem() && consecutivePlaybackErrors < mediaItemCount) {
+                consecutivePlaybackErrors++
+                seekToNext()
+                prepare()
+            }
+        }
+    }
+
+    override fun onIsPlayingChanged(isPlaying: Boolean) {
+        if (isPlaying) {
+            consecutivePlaybackErrors = 0
+        }
+    }
 
     override fun onEvents(player: Player, events: Player.Events) {
         if (
